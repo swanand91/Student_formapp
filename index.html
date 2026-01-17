@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Add User Cards</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial;
+            background: #f2f2f2;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .main-box {
+            width: 500px;
+            padding: 15px;
+            border: 2px solid #aaa;
+            border-radius: 10px;
+            background: #fff;
+        }
+
+        .form-box {
+            border: 1px solid #ccc;
+            padding: 10px;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+
+        input {
+            width: 95%;
+            padding: 6px;
+            margin: 5px 0;
+        }
+
+        button {
+            padding: 6px 12px;
+            margin-top: 5px;
+            cursor: pointer;
+        }
+
+        .cards {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+        }
+
+        .card {
+            border: 1px solid #999;
+            padding: 8px;
+            font-size: 13px;
+            background: #fafafa;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+
+<script>
+    // Main container
+    let mainBox = document.createElement("div");
+    mainBox.className = "main-box";
+
+    // Form box
+    let formBox = document.createElement("div");
+    formBox.className = "form-box";
+
+    let title = document.createElement("h3");
+    title.innerText = "Add User";
+
+    let nameInput = document.createElement("input");
+    nameInput.placeholder = "Name";
+
+    let emailInput = document.createElement("input");
+    emailInput.placeholder = "Email";
+
+    let courseInput = document.createElement("input");
+    courseInput.placeholder = "Course";
+
+    let addBtn = document.createElement("button");
+    addBtn.innerText = "Add";
+    addBtn.onclick = addUser;
+
+    let studentHeading = document.createElement("h2");
+studentHeading.innerText = "Added Student List";
+studentHeading.style.textAlign = "center";
+studentHeading.style.margin = "10px 0";
+
+
+    formBox.append(title, nameInput, emailInput, courseInput, addBtn);
+
+    // Cards container
+    let cardsBox = document.createElement("div");
+    cardsBox.className = "cards";
+
+    function addUser() {
+        if (
+            nameInput.value === "" ||
+            emailInput.value === "" ||
+            courseInput.value === ""
+        ) {
+            alert("Fill all fields");
+            return;
+        }
+
+        let card = document.createElement("div");
+        card.className = "card";
+
+        card.innerHTML = `
+            <strong>${nameInput.value}</strong><br>
+            ${emailInput.value}<br>
+            ${courseInput.value}
+        `;
+
+        cardsBox.appendChild(card);
+
+        nameInput.value = "";
+        emailInput.value = "";
+        courseInput.value = "";
+    }
+
+    mainBox.append(formBox, studentHeading, cardsBox);
+
+    document.body.appendChild(mainBox);
+</script>
+
+</body>
+</html>
